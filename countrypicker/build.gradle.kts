@@ -4,6 +4,7 @@ plugins {
     kotlin("plugin.parcelize")
     alias(libs.plugins.dokka)
     alias(libs.plugins.publisher)
+    alias(libs.plugins.kotlin.compose.compiler)
 }
 
 object Meta {
@@ -55,9 +56,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     buildTypes {

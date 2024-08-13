@@ -1,23 +1,22 @@
 [versions]
 # Build
-app-version-name = "1.0.0"
+app-version-name = "1.1.0"
 sdk-compile = "34"
 sdk-min = "21"
 sdk-target = "34"
 
-agp = "8.3.0"
-kotlin = "1.9.22"
-core = "1.12.0"
+agp = "8.5.2"
+kotlin = "2.0.10"
+core = "1.13.1"
 junit = "4.13.2"
-junit-version = "1.1.5"
-espresso-core = "3.5.1"
-lifecycle = "2.7.0"
-activity-compose = "1.8.2"
-compose-compiler = "1.5.8"
-compose-bom = "2024.02.02"
-material = "1.11.0"
-google-truth = "1.4.2"
-publisher = "1.2.3"
+junit-version = "1.2.1"
+espresso-core = "3.6.1"
+lifecycle = "2.8.4"
+activity-compose = "1.9.1"
+compose-bom = "2024.06.00"
+material = "1.12.0"
+google-truth = "1.4.4"
+publisher = "1.2.4"
 dokka = "1.9.20"
 
 [libraries]
@@ -46,3 +45,4 @@ jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "k
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 publisher = { id = "net.thebugmc.gradle.sonatype-central-portal-publisher", version.ref = "publisher" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
