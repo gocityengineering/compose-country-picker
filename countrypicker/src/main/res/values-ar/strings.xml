@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="clear_text">مسح النص</string>
     <string name="country">دولة</string>
+    <string name="search">يبحث</string>
 </resources>

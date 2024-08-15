@@ -1,15 +1,19 @@
 package com.gocity.countrypicker.ui
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -57,6 +61,7 @@ internal fun <T> LargeBottomMenu(
     isCurrentItem: (T) -> Boolean = { it == currentItem },
     onItemSelected: (item: T) -> Unit,
     valueFormatter: (T) -> String = { it.toString() },
+    searchHeader: @Composable () -> Unit = {},
     drawItem: @Composable (T, Boolean, Boolean, () -> Unit) -> Unit = { item, selected, itemEnabled, onClick ->
         LargeBottomMenuItem(
             text = valueFormatter(item),
@@ -110,19 +115,22 @@ internal fun <T> LargeBottomMenu(
                         .ifPositive { listState.scrollToItem(it) }
                 }
             }
-            LazyColumn(
-                modifier = Modifier.fillMaxWidth(),
-                state = listState,
-                contentPadding = WindowInsets.systemBars.asPaddingValues()
-            ) {
-                itemsIndexed(items) { index, item ->
-                    val isSelected = item == currentItem
-                    drawItem(item, isSelected, true) {
-                        onItemSelected(item)
-                        expanded = false
-                    }
-                    if (index < items.lastIndex) {
-                        HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+            Column {
+                Box(Modifier.statusBarsPadding()) { searchHeader() }
+                LazyColumn(
+                    modifier = Modifier.fillMaxWidth(),
+                    state = listState,
+                    contentPadding = WindowInsets.navigationBars.asPaddingValues()
+                ) {
+                    itemsIndexed(items) { index, item ->
+                        val isSelected = item == currentItem
+                        drawItem(item, isSelected, true) {
+                            onItemSelected(item)
+                            expanded = false
+                        }
+                        if (index < items.lastIndex) {
+                            HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+                        }
                     }
                 }
             }

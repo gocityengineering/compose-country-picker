@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="clear_text">Καθαρό κείμενο</string>
     <string name="country">Χώρα</string>
+    <string name="search">Ερευνα</string>
 </resources>

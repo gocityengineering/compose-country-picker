@@ -1,3 +1,5 @@
 <resources>
+    <string name="clear_text">クリアテキスト</string>
     <string name="country">国</string>
+    <string name="search">検索</string>
 </resources>

@@ -55,10 +55,10 @@ class MainActivity : ComponentActivity() {
                         .nestedScroll(scrollBehavior.nestedScrollConnection)
                         .fillMaxSize()
 
-                ) {
+                ) { padding ->
                     Column(
                         Modifier
-                            .padding(it)
+                            .padding(padding)
                             .padding(16.dp)
                             .fillMaxSize()
                             .verticalScroll(rememberScrollState())

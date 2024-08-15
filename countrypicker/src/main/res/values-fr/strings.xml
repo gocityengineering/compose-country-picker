@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="country">Land</string>
+    <string name="clear_text">Effacer le texte</string>
+    <string name="country">Pays</string>
+    <string name="search">Recherche</string>
 </resources>

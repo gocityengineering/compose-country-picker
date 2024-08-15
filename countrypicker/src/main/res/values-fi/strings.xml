@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="clear_text">Selkeää tekstiä</string>
     <string name="country">Maa</string>
+    <string name="search">Haku</string>
 </resources>
