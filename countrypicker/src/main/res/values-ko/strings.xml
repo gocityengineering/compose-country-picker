@@ -1,3 +1,5 @@
 <resources>
+    <string name="clear_text">텍스트 지우기</string>
     <string name="country">국가</string>
+    <string name="search">검색</string>
 </resources>

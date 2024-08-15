@@ -1,3 +1,5 @@
 <resources>
+    <string name="clear_text">Clear text</string>
     <string name="country">Country</string>
+    <string name="search">Search</string>
 </resources>

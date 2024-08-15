@@ -23,4 +23,14 @@ class StringExtensionKtTest {
             assertThat(input.removeDiacritics).isEqualTo(result)
         }
     }
+
+    @Test
+    fun `first letters`() {
+        for ((input, result) in listOf(
+            "United States" to "US",
+            "United Kingdom" to "UK"
+        )) {
+            assertThat(input.firstLetters).isEqualTo(result)
+        }
+    }
 }

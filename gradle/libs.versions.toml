@@ -1,6 +1,6 @@
 [versions]
 # Build
-app-version-name = "1.1.0"
+app-version-name = "1.2.0"
 sdk-compile = "34"
 sdk-min = "21"
 sdk-target = "34"

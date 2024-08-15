@@ -7,12 +7,12 @@
 </a>
 </div>
 
-# Jetpack Compose Country Code Picker [![Maven Central](https://img.shields.io/badge/Maven_Central-1.0.0-orange)](https://central.sonatype.com/artifact/com.gocity.countrypicker/countrypicker/1.0.0)
+# Jetpack Compose Country Code Picker [![Maven Central](https://img.shields.io/badge/Maven_Central-1.2.0-orange)](https://central.sonatype.com/artifact/com.gocity.countrypicker/countrypicker/1.0.0)
 
 
 ![Platform](https://img.shields.io/badge/platform-android-34A853?logo=android)
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-7F52FF?logo=kotlin)](https://kotlinlang.org/)
-[![Compose](https://img.shields.io/badge/Compose-1.6.3-4285F4?logo=jetpackcompose)](https://developer.android.com/jetpack/compose/)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.0.10-7F52FF?logo=kotlin)](https://kotlinlang.org/)
+[![Compose](https://img.shields.io/badge/Compose-1.6.8-4285F4?logo=jetpackcompose)](https://developer.android.com/jetpack/compose/)
 
 ## A very simple Country Code Picker
 
@@ -36,7 +36,7 @@ Toml configuration
 
 ```toml
 [versions]
-countrypicker = '1.0.0'
+countrypicker = '1.2.0'
 
 [libraries]
 countrypicker = { group = "com.gocity.countrypicker", name = "countrypicker", version.ref = "countrypicker" }
@@ -49,7 +49,7 @@ implementation("libs.countrypicker")
 Just gradle
 
 ```groovy
-implementation("com.gocity.countrypicker:countrypicker:1.0.0")
+implementation("com.gocity.countrypicker:countrypicker:1.2.0")
 ```
 
 ## Usage

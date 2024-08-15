@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="clear_text">Téacs soiléir</string>
     <string name="country">Tír</string>
+    <string name="search">Cuardach</string>
 </resources>
