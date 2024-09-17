@@ -1,7 +1,6 @@
 package com.gocity.countrypicker.ui
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -106,7 +104,7 @@ internal fun <T> LargeBottomMenu(
             onDismissRequest = { expanded = false },
             sheetState = bottomSheetState,
             dragHandle = null,
-            windowInsets = WindowInsets.ime
+            contentWindowInsets = { WindowInsets.ime }
         ) {
             val listState = rememberLazyListState()
             if (currentItem != null) {
