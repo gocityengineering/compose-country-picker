@@ -10,7 +10,6 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -86,30 +85,28 @@ fun CountryPicker(
 
 @Composable
 fun SearchHeader(searchTerm: String, updateSearchTerm: (String) -> Unit) {
-    Surface {
-        OutlinedTextField(
-            value = searchTerm,
-            onValueChange = updateSearchTerm,
-            modifier = Modifier
-                .fillMaxWidth()
-                .statusBarsPadding()
-                .padding(16.dp),
-            label = { Text(stringResource(R.string.search)) },
-            leadingIcon = {
+    OutlinedTextField(
+        value = searchTerm,
+        onValueChange = updateSearchTerm,
+        modifier = Modifier
+            .fillMaxWidth()
+            .statusBarsPadding()
+            .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+        label = { Text(stringResource(R.string.search)) },
+        leadingIcon = {
+            Icon(
+                Icons.Default.Search,
+                stringResource(R.string.search)
+            )
+        },
+        trailingIcon = {
+            if (searchTerm.isNotEmpty()) {
                 Icon(
-                    Icons.Default.Search,
-                    stringResource(R.string.search)
+                    Icons.Default.Clear, null,
+                    Modifier.clickable { updateSearchTerm("") }
                 )
-            },
-            trailingIcon = {
-                if (searchTerm.isNotEmpty()) {
-                    Icon(
-                        Icons.Default.Clear, null,
-                        Modifier.clickable { updateSearchTerm("") }
-                    )
-                }
-            },
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
-        )
-    }
+            }
+        },
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
+    )
 }

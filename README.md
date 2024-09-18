@@ -7,7 +7,7 @@
 </a>
 </div>
 
-# Jetpack Compose Country Code Picker [![Maven Central](https://img.shields.io/badge/Maven_Central-1.3.0-orange)](https://central.sonatype.com/artifact/com.gocity.countrypicker/countrypicker/1.3.0)
+# Jetpack Compose Country Code Picker [![Maven Central](https://img.shields.io/badge/Maven_Central-1.3.1-orange)](https://central.sonatype.com/artifact/com.gocity.countrypicker/countrypicker/1.3.1)
 
 
 ![Platform](https://img.shields.io/badge/platform-android-34A853?logo=android)
