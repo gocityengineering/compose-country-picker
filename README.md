@@ -16,6 +16,9 @@
 
 ## A very simple Country Code Picker
 
+Includes a `CountryPicker` and a `PhoneNumberPicker`, which pairs a country's flag and calling code
+with a phone number field that formats and validates the number for that country.
+
 The library uses emojis and the standard Java country translations so you get a rich looking UI
 without needing any translations. The only resource strings it uses are labels such as "Country"
 and "Phone number" and the phone number error messages, so if you want to display something else

@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-09-25
+
+### Added
+
+- `PhoneNumberPicker`, a phone number field with the country's flag and calling code. Numbers are
+  formatted and validated using each country's rules, and the country follows what is typed,
+  e.g. typing a Toronto number after +1 selects Canada. International numbers can be typed,
+  pasted or autofilled.
+- `Country.callingCode`, `Country.dialCode` and `getAllPhoneCountries()`
+- A `shape` option for `CountryPicker` and its search bar, e.g. `CircleShape` for fully rounded
+- The country list can be searched by ISO 3166-1 alpha-3 code, e.g. "GBR", as well as alpha-2
+
+### Changed
+
+- Removed the dependency on `material-icons-core`. The few icons used are now part of the library.
+- Added a dependency on Google's libphonenumber for phone number formatting and validation
+- Upgraded to Kotlin 2.4.20, Compose BOM 2026.09.00 and Android Gradle Plugin 9.4.1
+
 ## [1.3.1] - 2024-09-18
 
 ### Changed
