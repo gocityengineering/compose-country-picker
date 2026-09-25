@@ -53,7 +53,7 @@ import com.gocity.countrypicker.model.dialCode
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewPhoneNumberPicker() {
+private fun PreviewPhoneNumberPicker() {
     PhoneNumberPicker(
         rememberPhoneNumberState(Country("GB", "United Kingdom"), "7400123456"),
         Modifier.padding(16.dp),
