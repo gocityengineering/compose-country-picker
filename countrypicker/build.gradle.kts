@@ -1,11 +1,19 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
-    kotlin("plugin.parcelize")
+    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.dokka.javadoc)
     alias(libs.plugins.publisher)
     alias(libs.plugins.kotlin.compose.compiler)
 }
+
+val appVersionName: String = providers
+    .fileContents(rootProject.layout.projectDirectory.file("gradle/version.properties"))
+    .asText
+    .map { text -> Properties().apply { load(text.reader()) }.getProperty("APP_VERSION_NAME") }
+    .get()
 
 object Meta {
     const val GITHUB_REPO = "github.com/gocityengineering/compose-country-picker.git"
@@ -13,10 +21,19 @@ object Meta {
 
 description = "A lightweight, localised Country Picker for Jetpack Compose"
 group = "com.gocity.countrypicker"
-version = libs.versions.app.version.name.get()
+version = appVersionName
+
+// The publisher only knows Dokka's V1 javadoc task, which Dokka 2 has removed, so give it a
+// javadoc jar built from Dokka 2's output instead
+val dokkaJavadocJar by tasks.registering(Jar::class) {
+    description = "Creates a `-javadoc` jar from Dokka's Javadoc output"
+    from(tasks.dokkaGeneratePublicationJavadoc.flatMap { it.outputDirectory })
+    archiveClassifier = "javadoc"
+}
 
 centralPortal {
     name = "countrypicker"
+    javadocJarTask = dokkaJavadocJar
     versionMapping {
         allVariants {
             fromResolutionOf("releaseRuntimeClasspath")
@@ -76,6 +93,7 @@ android {
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
+    implementation(libs.libphonenumber)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     testImplementation(libs.junit)

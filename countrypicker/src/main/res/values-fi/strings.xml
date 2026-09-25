@@ -3,4 +3,9 @@
     <string name="clear_text">Selkeää tekstiä</string>
     <string name="country">Maa</string>
     <string name="search">Haku</string>
+    <string name="phone_number">Puhelinnumero</string>
+    <string name="phone_number_too_short">Puhelinnumero on liian lyhyt</string>
+    <string name="phone_number_too_long">Puhelinnumero on liian pitkä</string>
+    <string name="phone_number_invalid">Anna kelvollinen puhelinnumero</string>
+    <string name="change_country">Vaihda maa</string>
 </resources>

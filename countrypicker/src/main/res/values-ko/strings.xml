@@ -2,4 +2,9 @@
     <string name="clear_text">텍스트 지우기</string>
     <string name="country">국가</string>
     <string name="search">검색</string>
+    <string name="phone_number">전화번호</string>
+    <string name="phone_number_too_short">전화번호가 너무 짧습니다</string>
+    <string name="phone_number_too_long">전화번호가 너무 깁니다</string>
+    <string name="phone_number_invalid">올바른 전화번호를 입력하세요</string>
+    <string name="change_country">국가 변경</string>
 </resources>

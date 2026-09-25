@@ -3,4 +3,9 @@
     <string name="clear_text">טקסט ברור</string>
     <string name="country">מדינה</string>
     <string name="search">לְחַפֵּשׂ</string>
+    <string name="phone_number">מספר טלפון</string>
+    <string name="phone_number_too_short">מספר הטלפון קצר מדי</string>
+    <string name="phone_number_too_long">מספר הטלפון ארוך מדי</string>
+    <string name="phone_number_invalid">יש להזין מספר טלפון תקין</string>
+    <string name="change_country">שינוי מדינה</string>
 </resources>

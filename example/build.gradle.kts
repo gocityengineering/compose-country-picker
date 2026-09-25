@@ -1,8 +1,15 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.kotlin.compose.compiler)
 }
+
+val appVersionName: String = providers
+    .fileContents(rootProject.layout.projectDirectory.file("gradle/version.properties"))
+    .asText
+    .map { text -> Properties().apply { load(text.reader()) }.getProperty("APP_VERSION_NAME") }
+    .get()
 
 android {
     namespace = "com.gocity.countrypicker.example"
@@ -13,7 +20,7 @@ android {
         minSdk = libs.versions.sdk.min.get().toInt()
         targetSdk = libs.versions.sdk.target.get().toInt()
         versionCode = 1
-        versionName = libs.versions.app.version.name.get()
+        versionName = appVersionName
     }
 
     buildTypes {
@@ -46,7 +53,6 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
-    implementation(libs.android.material)
     testImplementation(libs.junit)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

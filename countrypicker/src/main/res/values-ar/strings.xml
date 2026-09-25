@@ -3,4 +3,9 @@
     <string name="clear_text">مسح النص</string>
     <string name="country">دولة</string>
     <string name="search">يبحث</string>
+    <string name="phone_number">رقم الهاتف</string>
+    <string name="phone_number_too_short">رقم الهاتف قصير جدًا</string>
+    <string name="phone_number_too_long">رقم الهاتف طويل جدًا</string>
+    <string name="phone_number_invalid">أدخل رقم هاتف صالحًا</string>
+    <string name="change_country">تغيير البلد</string>
 </resources>

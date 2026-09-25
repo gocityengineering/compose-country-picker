@@ -4,7 +4,9 @@ import android.os.Parcelable
 import com.gocity.countrypicker.extensions.removeDiacritics
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
+import java.util.IllformedLocaleException
 import java.util.Locale
+import java.util.MissingResourceException
 
 /**
  * Country object.
@@ -48,11 +50,25 @@ data class Country(val isoCode: String, val name: String) : Parcelable {
  * @param locale defaults to the current Locale of the app.
  */
 fun getAllCountries(locale: Locale = Locale.getDefault()): List<Country> =
-    Locale.getISOCountries().map {
-        Country(it, Locale("", it).getDisplayCountry(locale))
-    }
+    Locale.getISOCountries().map { countryFor(it, locale) }
         // Put user's current locale's country at the top of the list
         .partition { it.isoCode == locale.country }
         .let { (currentCountry, remainingCounties) ->
             currentCountry + remainingCounties.sortedBy { it.name.removeDiacritics }
         } // Ensures that countries with accents in the name are sorted correctly
+
+internal fun countryFor(isoCode: String, locale: Locale = Locale.getDefault()) =
+    Country(isoCode, regionLocale(isoCode).getDisplayCountry(locale))
+
+/** The ISO 3166-1 alpha-3 code, e.g. "GBR", or null if Java doesn't know it */
+internal val Country.iso3Code: String?
+    get() = try {
+        regionLocale(isoCode).isO3Country.takeIf { it.isNotEmpty() }
+    } catch (_: IllformedLocaleException) {
+        null
+    } catch (_: MissingResourceException) {
+        null
+    }
+
+/** A [Locale] for just a region, which is all that's needed to look up a country's details */
+private fun regionLocale(isoCode: String): Locale = Locale.Builder().setRegion(isoCode).build()

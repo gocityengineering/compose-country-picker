@@ -3,4 +3,9 @@
     <string name="clear_text">Tekst wissen</string>
     <string name="country">Land</string>
     <string name="search">Zoeken</string>
+    <string name="phone_number">Telefoonnummer</string>
+    <string name="phone_number_too_short">Het telefoonnummer is te kort</string>
+    <string name="phone_number_too_long">Het telefoonnummer is te lang</string>
+    <string name="phone_number_invalid">Voer een geldig telefoonnummer in</string>
+    <string name="change_country">Land wijzigen</string>
 </resources>

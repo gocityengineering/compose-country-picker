@@ -3,4 +3,9 @@
     <string name="clear_text">Téacs soiléir</string>
     <string name="country">Tír</string>
     <string name="search">Cuardach</string>
+    <string name="phone_number">Uimhir theileafóin</string>
+    <string name="phone_number_too_short">Tá an uimhir theileafóin róghearr</string>
+    <string name="phone_number_too_long">Tá an uimhir theileafóin rófhada</string>
+    <string name="phone_number_invalid">Cuir isteach uimhir theileafóin bhailí</string>
+    <string name="change_country">Athraigh an tír</string>
 </resources>
