@@ -1,11 +1,13 @@
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.SourcesJar
 import java.util.Properties
 
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.dokka)
-    alias(libs.plugins.dokka.javadoc)
-    alias(libs.plugins.publisher)
+    alias(libs.plugins.maven.publish)
     alias(libs.plugins.kotlin.compose.compiler)
 }
 
@@ -23,23 +25,22 @@ description = "A lightweight, localised Country Picker for Jetpack Compose"
 group = "com.gocity.countrypicker"
 version = appVersionName
 
-// The publisher only knows Dokka's V1 javadoc task, which Dokka 2 has removed, so give it a
-// javadoc jar built from Dokka 2's output instead
-val dokkaJavadocJar by tasks.registering(Jar::class) {
-    description = "Creates a `-javadoc` jar from Dokka's Javadoc output"
-    from(tasks.dokkaGeneratePublicationJavadoc.flatMap { it.outputDirectory })
-    archiveClassifier = "javadoc"
-}
-
-centralPortal {
-    name = "countrypicker"
-    javadocJarTask = dokkaJavadocJar
-    versionMapping {
-        allVariants {
-            fromResolutionOf("releaseRuntimeClasspath")
-        }
-    }
+mavenPublishing {
+    coordinates(group.toString(), "countrypicker", appVersionName)
+    configure(
+        AndroidSingleVariantLibrary(
+            javadocJar = JavadocJar.Dokka("dokkaGeneratePublicationHtml"),
+            sourcesJar = SourcesJar.Sources(),
+            variant = "release",
+        )
+    )
+    // Uploads for review; press Publish under Deployments on central.sonatype.com to release
+    publishToMavenCentral(automaticRelease = false)
+    signAllPublications()
     pom {
+        name = "countrypicker"
+        description = project.description
+        inceptionYear = "2024"
         url = "https://${Meta.GITHUB_REPO}"
         licenses {
             license {
@@ -52,13 +53,22 @@ centralPortal {
                 id = "barry-irvine"
                 name = "Barry Irvine"
                 organization = "Go City"
-                organizationUrl ="https://www.gocity.com"
+                organizationUrl = "https://www.gocity.com"
             }
         }
         scm {
             connection = "scm:git:${Meta.GITHUB_REPO}"
             developerConnection = "scm:git:ssh://${Meta.GITHUB_REPO}"
             url = "https://${Meta.GITHUB_REPO}"
+        }
+    }
+}
+
+// Write the versions the Compose BOM resolves to into the POM, rather than relying on the BOM import
+publishing {
+    publications.withType<MavenPublication>().configureEach {
+        versionMapping {
+            allVariants { fromResolutionOf("releaseRuntimeClasspath") }
         }
     }
 }
