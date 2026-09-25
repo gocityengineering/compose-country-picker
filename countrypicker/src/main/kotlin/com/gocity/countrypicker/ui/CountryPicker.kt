@@ -4,12 +4,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.intl.Locale
@@ -28,6 +28,10 @@ import com.gocity.countrypicker.extensions.firstLetters
 import com.gocity.countrypicker.extensions.removeDiacritics
 import com.gocity.countrypicker.model.Country
 import com.gocity.countrypicker.model.getAllCountries
+import com.gocity.countrypicker.model.iso3Code
+import com.gocity.countrypicker.ui.icons.Clear
+import com.gocity.countrypicker.ui.icons.CountryPickerIcon
+import com.gocity.countrypicker.ui.icons.Search
 
 @Preview(showBackground = true)
 @Composable
@@ -49,6 +53,7 @@ fun PreviewCountryPicker() {
  * @param currentCountry the currently selected country. Has a different presentation in the picker.
  * @param label the text label that the picker text box shows. Defaults to "Country"
  * @param showSearch whether the search bar should be shown. Defaults to true
+ * @param shape the shape of the picker's text box and search bar, e.g. [CircleShape] for fully rounded
  * @param onCountrySelected the callback that is triggered when the user selects a countru. The selected country is returned.
  */
 @Composable
@@ -58,6 +63,7 @@ fun CountryPicker(
     currentCountry: Country? = null,
     label: String = stringResource(R.string.country),
     showSearch: Boolean = true,
+    shape: Shape = OutlinedTextFieldDefaults.shape,
     onCountrySelected: (Country) -> Unit
 ) {
     // Update the currently selected country if the Locale changes
@@ -70,21 +76,28 @@ fun CountryPicker(
     LargeBottomMenu(
         modifier = modifier,
         label = label,
-        items = countries.filter {
-            it.name.removeDiacritics.contains(searchTerm.removeDiacritics, true) ||
-                    it.isoCode.equals(searchTerm, true) ||
-                    it.name.firstLetters.equals(searchTerm, true)
-        },
+        items = countries.filter { it.matches(searchTerm) },
         currentItem = currentCountry,
         isCurrentItem = { it.isoCode == currentCountry?.isoCode },
         onItemSelected = onCountrySelected,
         valueFormatter = { it.toUiString() },
-        searchHeader = { if (showSearch) SearchHeader(searchTerm) { searchTerm = it } }
+        shape = shape,
+        searchHeader = { if (showSearch) SearchHeader(searchTerm, shape) { searchTerm = it } }
     )
 }
 
+internal fun Country.matches(searchTerm: String) =
+    name.removeDiacritics.contains(searchTerm.removeDiacritics, true) ||
+            isoCode.equals(searchTerm, true) ||
+            iso3Code.equals(searchTerm, true) ||
+            name.firstLetters.equals(searchTerm, true)
+
 @Composable
-fun SearchHeader(searchTerm: String, updateSearchTerm: (String) -> Unit) {
+fun SearchHeader(
+    searchTerm: String,
+    shape: Shape = OutlinedTextFieldDefaults.shape,
+    updateSearchTerm: (String) -> Unit,
+) {
     OutlinedTextField(
         value = searchTerm,
         onValueChange = updateSearchTerm,
@@ -95,18 +108,19 @@ fun SearchHeader(searchTerm: String, updateSearchTerm: (String) -> Unit) {
         label = { Text(stringResource(R.string.search)) },
         leadingIcon = {
             Icon(
-                Icons.Default.Search,
+                CountryPickerIcon.Search,
                 stringResource(R.string.search)
             )
         },
         trailingIcon = {
             if (searchTerm.isNotEmpty()) {
                 Icon(
-                    Icons.Default.Clear, null,
+                    CountryPickerIcon.Clear, null,
                     Modifier.clickable { updateSearchTerm("") }
                 )
             }
         },
-        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+        shape = shape,
     )
 }

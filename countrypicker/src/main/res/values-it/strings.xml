@@ -2,4 +2,9 @@
     <string name="clear_text">Cancella testo</string>
     <string name="country">Paese</string>
     <string name="search">Ricerca</string>
+    <string name="phone_number">Numero di telefono</string>
+    <string name="phone_number_too_short">Il numero di telefono è troppo corto</string>
+    <string name="phone_number_too_long">Il numero di telefono è troppo lungo</string>
+    <string name="phone_number_invalid">Inserisci un numero di telefono valido</string>
+    <string name="change_country">Cambia paese</string>
 </resources>

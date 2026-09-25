@@ -1,11 +1,18 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
-    kotlin("plugin.parcelize")
+    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.dokka)
     alias(libs.plugins.publisher)
     alias(libs.plugins.kotlin.compose.compiler)
 }
+
+val appVersionName: String = providers
+    .fileContents(rootProject.layout.projectDirectory.file("gradle/version.properties"))
+    .asText
+    .map { text -> Properties().apply { load(text.reader()) }.getProperty("APP_VERSION_NAME") }
+    .get()
 
 object Meta {
     const val GITHUB_REPO = "github.com/gocityengineering/compose-country-picker.git"
@@ -13,7 +20,7 @@ object Meta {
 
 description = "A lightweight, localised Country Picker for Jetpack Compose"
 group = "com.gocity.countrypicker"
-version = libs.versions.app.version.name.get()
+version = appVersionName
 
 centralPortal {
     name = "countrypicker"
@@ -76,6 +83,7 @@ android {
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
+    implementation(libs.libphonenumber)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     testImplementation(libs.junit)

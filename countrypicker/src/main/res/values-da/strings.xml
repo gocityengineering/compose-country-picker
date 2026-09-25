@@ -3,4 +3,9 @@
     <string name="clear_text">Klar tekst</string>
     <string name="country">Land</string>
     <string name="search">Søge</string>
+    <string name="phone_number">Telefonnummer</string>
+    <string name="phone_number_too_short">Telefonnummeret er for kort</string>
+    <string name="phone_number_too_long">Telefonnummeret er for langt</string>
+    <string name="phone_number_invalid">Indtast et gyldigt telefonnummer</string>
+    <string name="change_country">Skift land</string>
 </resources>

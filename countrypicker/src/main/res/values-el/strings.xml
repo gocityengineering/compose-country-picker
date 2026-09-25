@@ -3,4 +3,9 @@
     <string name="clear_text">Καθαρό κείμενο</string>
     <string name="country">Χώρα</string>
     <string name="search">Ερευνα</string>
+    <string name="phone_number">Αριθμός τηλεφώνου</string>
+    <string name="phone_number_too_short">Ο αριθμός τηλεφώνου είναι πολύ σύντομος</string>
+    <string name="phone_number_too_long">Ο αριθμός τηλεφώνου είναι πολύ μεγάλος</string>
+    <string name="phone_number_invalid">Εισαγάγετε έναν έγκυρο αριθμό τηλεφώνου</string>
+    <string name="change_country">Αλλαγή χώρας</string>
 </resources>

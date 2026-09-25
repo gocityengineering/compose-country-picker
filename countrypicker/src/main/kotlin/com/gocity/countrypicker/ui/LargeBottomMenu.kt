@@ -15,8 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -25,6 +23,7 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -36,11 +35,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.gocity.countrypicker.extensions.ifPositive
+import com.gocity.countrypicker.ui.icons.Check
+import com.gocity.countrypicker.ui.icons.CountryPickerIcon
 
 /**
  * Because the performance of ExposedDropDownMenu is appalling when you get to 100+ rows we need an
@@ -58,6 +60,7 @@ internal fun <T> LargeBottomMenu(
     isCurrentItem: (T) -> Boolean = { it == currentItem },
     onItemSelected: (item: T) -> Unit,
     valueFormatter: (T) -> String = { it.toString() },
+    shape: Shape = OutlinedTextFieldDefaults.shape,
     searchHeader: @Composable () -> Unit = {},
     drawItem: @Composable (T, Boolean, Boolean, () -> Unit) -> Unit = { item, selected, itemEnabled, onClick ->
         LargeBottomMenuItem(
@@ -81,7 +84,8 @@ internal fun <T> LargeBottomMenu(
             label = { Text(label) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
             readOnly = true,
-            singleLine = true
+            singleLine = true,
+            shape = shape,
         )
         // Transparent clickable surface on top of OutlinedTextField
         Box(
@@ -89,18 +93,42 @@ internal fun <T> LargeBottomMenu(
                 .padding(vertical = 8.dp)
                 .fillMaxWidth()
                 .height(height)
-                .clip(MaterialTheme.shapes.extraSmall)
+                .clip(shape)
                 .clickable(enabled = enabled) { expanded = true },
         )
     }
 
+    LargeBottomSheet(
+        expanded = expanded,
+        onDismiss = { expanded = false },
+        items = items,
+        currentItem = currentItem,
+        isCurrentItem = isCurrentItem,
+        onItemSelected = onItemSelected,
+        searchHeader = searchHeader,
+        drawItem = drawItem,
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun <T> LargeBottomSheet(
+    expanded: Boolean,
+    onDismiss: () -> Unit,
+    items: List<T>,
+    currentItem: T?,
+    isCurrentItem: (T) -> Boolean,
+    onItemSelected: (item: T) -> Unit,
+    searchHeader: @Composable () -> Unit,
+    drawItem: @Composable (T, Boolean, Boolean, () -> Unit) -> Unit,
+) {
     val bottomSheetState = rememberModalBottomSheetState()
     LaunchedEffect(expanded) {
         if (expanded) bottomSheetState.expand() else bottomSheetState.hide()
     }
     if (expanded) {
         ModalBottomSheet(
-            onDismissRequest = { expanded = false },
+            onDismissRequest = onDismiss,
             sheetState = bottomSheetState,
             dragHandle = null,
             contentWindowInsets = { WindowInsets.ime }
@@ -123,7 +151,7 @@ internal fun <T> LargeBottomMenu(
                         val isSelected = item == currentItem
                         drawItem(item, isSelected, true) {
                             onItemSelected(item)
-                            expanded = false
+                            onDismiss()
                         }
                         if (index < items.lastIndex) {
                             HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
@@ -136,10 +164,19 @@ internal fun <T> LargeBottomMenu(
 }
 
 
-@SuppressLint("PrivateResource")
 @Composable
 fun LargeBottomMenuItem(
     text: String,
+    selected: Boolean,
+    enabled: Boolean,
+    onClick: () -> Unit,
+) = LargeBottomMenuItem(text, trailingText = null, selected, enabled, onClick)
+
+@SuppressLint("PrivateResource")
+@Composable
+internal fun LargeBottomMenuItem(
+    text: String,
+    trailingText: String?,
     selected: Boolean,
     enabled: Boolean,
     onClick: () -> Unit,
@@ -160,8 +197,16 @@ fun LargeBottomMenuItem(
                 modifier = Modifier.weight(1f),
                 style = MaterialTheme.typography.titleMedium,
             )
+            if (trailingText != null) {
+                Text(
+                    text = trailingText,
+                    modifier = Modifier.padding(start = 16.dp),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = if (selected) LocalContentColor.current else MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
             if (selected) {
-                Icon(Icons.Default.Check, stringResource(androidx.compose.ui.R.string.selected))
+                Icon(CountryPickerIcon.Check, stringResource(androidx.compose.ui.R.string.selected))
             }
         }
     }

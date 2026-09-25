@@ -3,4 +3,9 @@
     <string name="clear_text">Effacer le texte</string>
     <string name="country">Pays</string>
     <string name="search">Recherche</string>
+    <string name="phone_number">Numéro de téléphone</string>
+    <string name="phone_number_too_short">Le numéro de téléphone est trop court</string>
+    <string name="phone_number_too_long">Le numéro de téléphone est trop long</string>
+    <string name="phone_number_invalid">Saisissez un numéro de téléphone valide</string>
+    <string name="change_country">Changer de pays</string>
 </resources>
