@@ -2,9 +2,8 @@
 plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.androidLibrary) apply false
-    alias(libs.plugins.publisher) apply false
+    alias(libs.plugins.maven.publish) apply false
     alias(libs.plugins.dokka) apply false
-    alias(libs.plugins.dokka.javadoc) apply false
     alias(libs.plugins.kotlin.compose.compiler) apply false
     alias(libs.plugins.kotlin.parcelize) apply false
 }

@@ -35,7 +35,7 @@ import com.gocity.countrypicker.ui.icons.Search
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewCountryPicker() {
+private fun PreviewCountryPicker() {
     CountryPicker(
         Modifier.padding(16.dp),
         currentCountry = Country("GB", "United Kingdom")
