@@ -14,7 +14,7 @@ lifecycle = "2.11.0"
 activity-compose = "1.13.0"
 compose-bom = "2026.09.00"
 google-truth = "1.4.5"
-publisher = "1.2.4"
+maven-publish = "0.37.0"
 dokka = "2.2.0"
 libphonenumber = "9.0.40"
 
@@ -41,8 +41,7 @@ compose = ["androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling-preview",
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-publisher = { id = "net.thebugmc.gradle.sonatype-central-portal-publisher", version.ref = "publisher" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
-dokka-javadoc = { id = "org.jetbrains.dokka-javadoc", version.ref = "dokka" }
 kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
