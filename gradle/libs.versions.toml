@@ -4,8 +4,8 @@ sdk-compile = "37"
 sdk-min = "23"
 sdk-target = "37"
 
-agp = "9.4.1"
-kotlin = "2.4.20"
+agp = "9.5.1"
+kotlin = "2.4.21"
 core = "1.19.1"
 junit = "4.13.2"
 junit-version = "1.3.0"
@@ -15,8 +15,8 @@ activity-compose = "1.13.0"
 compose-bom = "2026.09.00"
 google-truth = "1.4.5"
 maven-publish = "0.37.0"
-dokka = "2.2.0"
-libphonenumber = "9.0.40"
+dokka = "2.3.0"
+libphonenumber = "9.0.43"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core" }

@@ -7,6 +7,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-11-06
+
 ### Changed
 
 - `PreviewCountryPicker` and `PreviewPhoneNumberPicker` are now private. They are Android Studio
@@ -17,6 +19,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   instead of the Sonatype Central Portal Publisher, which is no longer maintained. The library now
   also publishes Gradle Module Metadata, so Gradle resolves its dependencies more precisely.
 - The build uses the new Android Gradle Plugin DSL, as the old publisher needed the legacy one
+- Upgraded libphonenumber to 9.0.43, for the latest phone number metadata
+- Upgraded to Kotlin 2.4.21, Android Gradle Plugin 9.5.1, Dokka 2.3.0 and Gradle 9.8.2
 
 ## [1.4.0] - 2026-09-25
 
